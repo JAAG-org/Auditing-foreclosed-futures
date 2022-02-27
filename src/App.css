@@ -44,6 +44,7 @@
 
 .table-line {
   border-bottom: 1px solid black;
+  height: 35px;
 }
 
 .table-header {
