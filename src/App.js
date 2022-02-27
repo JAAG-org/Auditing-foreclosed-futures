@@ -16,7 +16,8 @@ const App = () => {
         <h1> About </h1>
       </Modal>
 
-      <h1 className="header"> Auditing foreclosed futures </h1>
+      <h1 className="header"> Auditing foreclosed futures+ </h1>
+      <h3 className="subheader"> Open Reception: 20 March 2022, 4PM++ </h3>
 
       <table className="table-files">
         <tr className="table-line">

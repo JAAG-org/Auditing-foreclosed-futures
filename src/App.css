@@ -3,14 +3,22 @@
 }
 
 .header {
-  position: absolute;
-  left: 20px;
+  margin-left: 20px;
+}
+
+.subheader {
+  font-size: 13px;
+  margin-left: 20px;
+  margin-top: -10px;
 }
 
 .about {
   position: absolute;
   right: 40px;
   bottom: 20px;
+}
+.about:hover {
+  cursor:help;
 }
 
 .artists {
@@ -28,9 +36,9 @@
 }
 
 .table-files {
-  position: absolute;
+  position: relative;
   padding: 20px;
-  top: 100px;
+  margin-top: 40px;
   width: calc(100% - 10px);
 }
 
