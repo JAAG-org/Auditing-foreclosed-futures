@@ -1,23 +1,63 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Modal from 'react-modal';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [isModalOpen, setModalOpen] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        contentLabel="About"
+        className="about-modal"
+      >
+        <h1> About </h1>
+      </Modal>
+
+      <h1 className="header"> Auditing foreclosed futures </h1>
+
+      <table className="table-files">
+        <tr className="table-line">
+          <th></th>
+          <th className="table-header">Name</th>
+          <th className="table-header">Last modified</th>
+          <th className="table-header">Size</th>
+          <th className="table-header">Description</th>
+        </tr>
+        <tr>
+          <td>🆙</td>
+          <td className="table-row-folder">Parent Directory</td>
+          <td></td>
+          <td>-</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>📈</td>
+          <td className="table-row-folder">Collecting lost dreams as if it will never disappear (Giang)/</td>
+          <td></td>
+          <td>-</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>👀</td>
+          <td className="table-row-folder">“Your Next Life in Thailand" (Nanut)/</td>
+          <td></td>
+          <td>-</td>
+          <td></td>
+        </tr>
+        <tr className="table-line">
+          <td>🌲</td>
+          <td className="table-row-folder">Thailand lose dream (Tewprai)/</td>
+          <td></td>
+          <td>-</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <p className="about" onClick={() => setModalOpen(true)}> About </p>
+      <p className="artists"> Artists </p>
     </div>
   );
 }
