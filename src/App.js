@@ -75,47 +75,26 @@ const App = () => {
     leaveDelay: 0,
   })
 
-  console.log(mouse.x, mouse.y)
-
   return (
     <div class="mouse-overlay" ref={mouseRef}>
-
-<div style={{
-          position: 'fixed',
-          left: mouse.x,
-          top: mouse.y,
-          width: '1px',
-          height: '100%',
-          background: 'black'
-        }}>
-        </div>
-        <div style={{
-          position: 'fixed',
-          left: mouse.x,
-          top: mouse.y,
-          width: '100%',
-          height: '1px',
-          background: 'black'
-        }}>
-        </div>
-        <div style={{
-          position: 'fixed',
-          left: mouse.x,
-          top: `calc(100% - ${mouse.y})`,
-          width: '1px',
-          height: '100%',
-          background: 'black'
-        }}>
-        </div>
-        <div style={{
-          position: 'fixed',
-          left: `calc(100% - ${-mouse.x})`,
-          top: mouse.y,
-          width: '100%',
-          height: '1px',
-          background: 'black'
-        }}>
-        </div>
+      <div style={{
+        position: 'fixed',
+        left: mouse.x,
+        top: `calc(100% - ${mouse.y})`,
+        width: '1px',
+        height: '100%',
+        borderLeft: '1px dashed black'
+      }}>
+      </div>
+      <div style={{
+        position: 'fixed',
+        left: `calc(100% - ${-mouse.x})`,
+        top: mouse.y,
+        width: '100%',
+        height: '1px',
+        borderTop: '1px dashed black'
+      }}>
+      </div>
 
       <div className="app">
         <Modal
