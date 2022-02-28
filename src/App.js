@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Modal from 'react-modal'
 import * as d3 from 'd3'
+import useMouse from '@react-hook/mouse-position'
 import './App.css'
 import csvData from './data/th_us.csv'
 
-const Chart = (props) => {
+const Chart = () => {
   const d3Container = useRef(null)
 
   useEffect(
@@ -13,7 +14,7 @@ const Chart = (props) => {
       const width = 400 - margin.left - margin.right
       const height = 200 - margin.top - margin.bottom
 
-      if (props.data && d3Container.current) {
+      if (d3Container.current) {
         const svg = d3.select(d3Container.current)
           .append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -53,7 +54,7 @@ const Chart = (props) => {
           }
         )
       }
-    }, [props.data, d3Container.current]
+    }, [d3Container.current]
   )
 
   return (
@@ -68,66 +69,113 @@ const Chart = (props) => {
 
 const App = () => {
   const [isModalOpen, setModalOpen] = useState(false)
+  const mouseRef = React.useRef(null)
+  const mouse = useMouse(mouseRef, {
+    enterDelay: 0,
+    leaveDelay: 0,
+  })
+
+  console.log(mouse.x, mouse.y)
 
   return (
-    <div className="App">
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        contentLabel="About"
-        className="about-modal"
-      >
-        <h1> About </h1>
-      </Modal>
+    <div class="mouse-overlay" ref={mouseRef}>
 
-      <div class="chart-container">
-        <Chart data={[1, 2, 3]}/>
+<div style={{
+          position: 'fixed',
+          left: mouse.x,
+          top: mouse.y,
+          width: '1px',
+          height: '100%',
+          background: 'black'
+        }}>
+        </div>
+        <div style={{
+          position: 'fixed',
+          left: mouse.x,
+          top: mouse.y,
+          width: '100%',
+          height: '1px',
+          background: 'black'
+        }}>
+        </div>
+        <div style={{
+          position: 'fixed',
+          left: mouse.x,
+          top: `calc(100% - ${mouse.y})`,
+          width: '1px',
+          height: '100%',
+          background: 'black'
+        }}>
+        </div>
+        <div style={{
+          position: 'fixed',
+          left: `calc(100% - ${-mouse.x})`,
+          top: mouse.y,
+          width: '100%',
+          height: '1px',
+          background: 'black'
+        }}>
+        </div>
+
+      <div className="app">
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={() => setModalOpen(false)}
+          contentLabel="About"
+          className="about-modal"
+        >
+          <h1> About </h1>
+        </Modal>
+
+        <div className="chart-container">
+          <Chart/>
+        </div>
+
+
+        <h1 className="header"> Auditing foreclosed futures+ </h1>
+        <h3 className="subheader"> Open Reception: 20 March 2022, 4PM++ </h3>
+
+        <table className="table-files">
+          <tr className="table-line">
+            <th></th>
+            <th className="table-header">Name</th>
+            <th className="table-header">Last modified</th>
+            <th className="table-header">Size</th>
+            <th className="table-header">Description</th>
+          </tr>
+          <tr>
+            <td>🆙</td>
+            <td className="table-row-folder">Parent Directory</td>
+            <td></td>
+            <td>-</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>📈</td>
+            <td className="table-row-folder">Collecting lost dreams as if it will never disappear (Giang)/</td>
+            <td></td>
+            <td>-</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>👀</td>
+            <td className="table-row-folder">“Your Next Life in Thailand" (Nanut)/</td>
+            <td></td>
+            <td>-</td>
+            <td></td>
+          </tr>
+          <tr className="table-line">
+            <td>🌲</td>
+            <td className="table-row-folder">Thailand lose dream (Tewprai)/</td>
+            <td></td>
+            <td>-</td>
+            <td></td>
+          </tr>
+        </table>
+
+        <p className="about" onClick={() => setModalOpen(true)}> About </p>
+        <p className="artists"> Artists </p>
       </div>
-
-
-      <h1 className="header"> Auditing foreclosed futures+ </h1>
-      <h3 className="subheader"> Open Reception: 20 March 2022, 4PM++ </h3>
-
-      <table className="table-files">
-        <tr className="table-line">
-          <th></th>
-          <th className="table-header">Name</th>
-          <th className="table-header">Last modified</th>
-          <th className="table-header">Size</th>
-          <th className="table-header">Description</th>
-        </tr>
-        <tr>
-          <td>🆙</td>
-          <td className="table-row-folder">Parent Directory</td>
-          <td></td>
-          <td>-</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>📈</td>
-          <td className="table-row-folder">Collecting lost dreams as if it will never disappear (Giang)/</td>
-          <td></td>
-          <td>-</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>👀</td>
-          <td className="table-row-folder">“Your Next Life in Thailand" (Nanut)/</td>
-          <td></td>
-          <td>-</td>
-          <td></td>
-        </tr>
-        <tr className="table-line">
-          <td>🌲</td>
-          <td className="table-row-folder">Thailand lose dream (Tewprai)/</td>
-          <td></td>
-          <td>-</td>
-          <td></td>
-        </tr>
-      </table>
-
-      <p className="about" onClick={() => setModalOpen(true)}> About </p>
-      <p className="artists"> Artists </p>
     </div>
   );
 }
