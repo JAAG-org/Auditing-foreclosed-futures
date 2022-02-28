@@ -29,10 +29,10 @@
 
 .about-modal {
   font: Consolas;
-  border: 1px solid black;
-  border-radius: 0px;
+  border: 2px solid black;
   margin: 100px;
   padding: 10px;
+  background: white;
 }
 
 .table-files {
@@ -57,4 +57,10 @@
   color: blueviolet;
   text-align: left;
   text-decoration: underline;
+}
+
+.chart-container {
+  position: absolute;
+  bottom: 150px;
+  left: calc(50% - 260px);
 }
