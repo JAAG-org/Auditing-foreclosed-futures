@@ -5,14 +5,25 @@ import useMouse from '@react-hook/mouse-position'
 import './App.css'
 import csvData from './data/th_us.csv'
 
-const Chart = () => {
+const Chart = (props) => {
   const d3Container = useRef(null)
+  const {
+    mouseX,
+    mouseY
+  } = props
+  const [increasing, setIncreasing] = useState(0)
+
+  useEffect(() => {
+    setInterval(() => {
+      setIncreasing(value => value + 10)
+    }, 500)
+  }, [])
 
   useEffect(
     () => {
       const margin = { top: 10, right: 30, bottom: 30, left: 60 }
-      const width = 400 - margin.left - margin.right
-      const height = 200 - margin.top - margin.bottom
+      const width = 1000 - margin.left - margin.right
+      const height = 400 - margin.top - margin.bottom
 
       if (d3Container.current) {
         const svg = d3.select(d3Container.current)
@@ -38,7 +49,7 @@ const Chart = () => {
 
             const y = d3.scaleLinear()
               .domain([0, d3.max(data, function(d) { return +d.value; })])
-              .range([ height, 0 ])
+              .range([ height , 0 + increasing ])
             svg.append("g")
               .call(d3.axisLeft(y))
 
@@ -54,14 +65,14 @@ const Chart = () => {
           }
         )
       }
-    }, [d3Container.current]
+    }, [d3Container.current, increasing]
   )
 
   return (
     <svg
       className="d3-component"
-      width={400}
-      height={200}
+      width={1000}
+      height={400}
       ref={d3Container}
     />
   )
@@ -107,11 +118,10 @@ const App = () => {
         </Modal>
 
         <div className="chart-container">
-          <Chart/>
+          <Chart mouseX={mouse.x} mouseY={mouse.y}/>
         </div>
 
-
-        <h1 className="header"> Auditing foreclosed futures+ </h1>
+        <h1 className="header"> Auditing foreclosed futures* </h1>
         <h3 className="subheader"> Open Reception: 20 March 2022, 4PM++ </h3>
 
         <table className="table-files">
