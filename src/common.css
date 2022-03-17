@@ -1,0 +1,6 @@
+.text-shadow-white {
+    text-shadow: 0 1px 1px rgba(255,255,255,0.08), 
+                0 2px 2px rgba(255,255,255,0.10), 
+                0 4px 4px rgba(255,255,255,0.12), 
+                0 8px 8px rgba(255,255,255,0.14);
+}

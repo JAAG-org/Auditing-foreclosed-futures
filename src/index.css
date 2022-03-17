@@ -1,9 +1,7 @@
 body {
   margin: 0;
-  font-family: monospace, Consolas, sans-serif;
+  font-family: Impact, monospace, sans-serif;
+  font-weight: 400;
+  background-color: black;
+  color: white;
 }
-
-table {
-  border-collapse: collapse;
-}
-

@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import * as d3 from 'd3'
 import useMouse from '@react-hook/mouse-position'
 import './App.css'
+import './common.css'
 import csvData from './data/th_us.csv'
 
 const Chart = (props) => {
@@ -12,18 +13,32 @@ const Chart = (props) => {
     mouseY
   } = props
   const [increasing, setIncreasing] = useState(0)
+  const [isRunning, setIsRunning] = useState(true)
 
   useEffect(() => {
-    setInterval(() => {
-      setIncreasing(value => value + 10)
-    }, 500)
-  }, [])
+    const increasingInterval = setInterval(() => {
+      if (isRunning) {
+        setIncreasing(value => value + 10)
+      }
+    }, 100)
+    
+    return () => {
+      clearInterval(increasingInterval)
+    }
+  }, [isRunning])
+
 
   useEffect(
     () => {
       const margin = { top: 10, right: 30, bottom: 30, left: 60 }
       const width = 1000 - margin.left - margin.right
       const height = 400 - margin.top - margin.bottom
+
+      console.log(increasing)
+
+      if (increasing > 300) {
+        setIsRunning(false)
+      }
 
       if (d3Container.current) {
         const svg = d3.select(d3Container.current)
@@ -57,11 +72,17 @@ const Chart = (props) => {
               .datum(data)
               .attr("fill", "none")
               .attr("stroke", "red")
-              .attr("stroke-width", 1.5)
+              .attr("stroke-width", 1)
               .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(d.value) })
               )
+              .on("mouseover", function (mouseEvent) {
+                d3
+                  .select(this.parentNode)
+                  .selectChild("path")
+                  .style("stroke", "blue");
+              })
           }
         )
       }
@@ -87,14 +108,14 @@ const App = () => {
   })
 
   return (
-    <div class="mouse-overlay" ref={mouseRef}>
+    <div className="mouse-overlay" ref={mouseRef}>
       <div style={{
         position: 'fixed',
         left: mouse.x,
         top: `calc(100% - ${mouse.y})`,
-        width: '1px',
         height: '100%',
-        borderLeft: '1px dashed black'
+        borderLeft: '1px dashed white',
+        zIndex: -1
       }}>
       </div>
       <div style={{
@@ -102,8 +123,8 @@ const App = () => {
         left: `calc(100% - ${-mouse.x})`,
         top: mouse.y,
         width: '100%',
-        height: '1px',
-        borderTop: '1px dashed black'
+        borderTop: '1px dashed white',
+        zIndex: -1
       }}>
       </div>
 
@@ -114,56 +135,32 @@ const App = () => {
           contentLabel="About"
           className="about-modal"
         >
-          <h1> About </h1>
+          <h1 className="modal-header"> About </h1>
         </Modal>
 
         <div className="chart-container">
           <Chart mouseX={mouse.x} mouseY={mouse.y}/>
         </div>
 
-        <h1 className="header"> Auditing foreclosed futures* </h1>
-        <h3 className="subheader"> Open Reception: 20 March 2022, 4PM++ </h3>
+        <h1 className="header text-shadow-white"> Auditing foreclosed futures* </h1>
+        <h3 className="subheader text-shadow-white"> Open Reception: 20 March 2022, 4PM++ </h3>
 
-        <table className="table-files">
-          <tr className="table-line">
-            <th></th>
-            <th className="table-header">Name</th>
-            <th className="table-header">Last modified</th>
-            <th className="table-header">Size</th>
-            <th className="table-header">Description</th>
-          </tr>
-          <tr>
-            <td>🆙</td>
-            <td className="table-row-folder">Parent Directory</td>
-            <td></td>
-            <td>-</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>📈</td>
-            <td className="table-row-folder">Collecting lost dreams as if it will never disappear (Giang)/</td>
-            <td></td>
-            <td>-</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>👀</td>
-            <td className="table-row-folder">“Your Next Life in Thailand" (Nanut)/</td>
-            <td></td>
-            <td>-</td>
-            <td></td>
-          </tr>
-          <tr className="table-line">
-            <td>🌲</td>
-            <td className="table-row-folder">Thailand lose dream (Tewprai)/</td>
-            <td></td>
-            <td>-</td>
-            <td></td>
-          </tr>
-        </table>
+        <div className='work-container'>
+          <div className="work-card">
+            <p className="work-card-title"> Collecting dreams as if it will never disappear </p>
+          </div>
+
+          <div className="work-card">
+            <p className="work-card-title"> Your next life in Thailand </p>
+          </div>
+
+          <div className="work-card">
+            <p className="work-card-title"> Thailand lost dream </p>
+          </div>
+        </div>
 
         <p className="about" onClick={() => setModalOpen(true)}> About </p>
-        <p className="artists"> Artists </p>
+        <p className="introduction"> Introductions </p>
       </div>
     </div>
   );
