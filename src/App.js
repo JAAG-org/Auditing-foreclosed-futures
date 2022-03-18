@@ -142,8 +142,10 @@ const App = () => {
           <Chart mouseX={mouse.x} mouseY={mouse.y}/>
         </div>
 
-        <h1 className="header text-shadow-white"> Auditing foreclosed futures* </h1>
-        <h3 className="subheader text-shadow-white"> Open Reception: 20 March 2022, 4PM++ </h3>
+        <header className="header">
+          <h1 className="title text-shadow-white"> Auditing foreclosed futures* </h1>
+          <h3 className="subtitle text-shadow-white"> Open Reception: 20 March 2022, 4PM++ </h3>
+        </header>
 
         <div className='work-container'>
 

@@ -9,13 +9,19 @@
 }
 
 .header {
+  padding-bottom: 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.title {
   font-size: 45px;
   margin-left: 20px;
   text-align: center;
   font-weight: 400;
 }
 
-.subheader {
+.subtitle {
   font-size: 13px;
   margin-left: 20px;
   margin-top: -20px;
@@ -52,16 +58,19 @@
 
 .chart-container {
   position: absolute;
-  bottom: 0px;
-  left: calc(50% - 360px);
+  bottom: 20px;
+  left: calc(50% - 400px);
 }
 
 .work-container {
-  margin:50px;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding: 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  width: calc(100% - 40px)
 }
 
 .work-card {
