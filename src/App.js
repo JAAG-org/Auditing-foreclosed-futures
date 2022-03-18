@@ -146,16 +146,25 @@ const App = () => {
         <h3 className="subheader text-shadow-white"> Open Reception: 20 March 2022, 4PM++ </h3>
 
         <div className='work-container'>
+
+          <div className="work-card">
+            <p className="work-card-title"> Thailand lost dream </p>
+            <p className="work-card-artist"> Tewprai Bualoi </p>
+          </div>
+
           <div className="work-card">
             <p className="work-card-title"> Collecting dreams as if it will never disappear </p>
+            <p className="work-card-artist"> Wasawat Somno </p>
           </div>
 
           <div className="work-card">
             <p className="work-card-title"> Your next life in Thailand </p>
+            <p className="work-card-artist"> Nanut Thanapornrapee </p>
           </div>
 
           <div className="work-card">
-            <p className="work-card-title"> Thailand lost dream </p>
+            <p className="work-card-title"> United </p>
+            <p className="work-card-artist"> </p>
           </div>
         </div>
 
