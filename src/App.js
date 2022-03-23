@@ -167,7 +167,7 @@ const App = () => {
             <p className="work-card-artist"> Tewprai Bualoi </p>
           </div>
 
-          <div className="work-card">
+          <div className="work-card" href="https://dream.bbbbbbubble.com" target="_blank">
             <p className="work-card-title"> Collecting dreams as if it will never disappear </p>
             <p className="work-card-artist"> Wasawat Somno </p>
           </div>
@@ -178,8 +178,12 @@ const App = () => {
           </div>
 
           <div className="work-card">
-            <p className="work-card-title"> United </p>
-            <p className="work-card-artist"> </p>
+            <p className="work-card-title"> No Future Machine </p>
+            <div className="work-card-grouped-artist">
+              <p className="work-grouped-artist">666TeenAngel</p>
+              <p className="work-grouped-artist">DRUNKPOWDER</p>
+              <p className="work-grouped-artist">NINA SACH</p>
+            </div>
           </div>
         </div>
 
