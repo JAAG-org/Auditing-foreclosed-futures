@@ -167,10 +167,10 @@ const App = () => {
             <p className="work-card-artist"> Tewprai Bualoi </p>
           </div>
 
-          <div className="work-card" href="https://dream.bbbbbbubble.com" target="_blank">
+          <a className="work-card" href="https://dream.bbbbbbubble.com" target="_blank">
             <p className="work-card-title"> Collecting dreams as if it will never disappear </p>
             <p className="work-card-artist"> Wasawat Somno </p>
-          </div>
+          </a>
 
           <div className="work-card">
             <p className="work-card-title"> Your next life in Thailand </p>
