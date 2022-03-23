@@ -21,11 +21,26 @@ const Chart = (props) => {
         setIncreasing(value => value + 10)
       }
     }, 100)
-    
+
     return () => {
       clearInterval(increasingInterval)
     }
   }, [isRunning])
+
+  useEffect(() => {
+    let interval
+    if (!isRunning) {
+      interval = setInterval(() => {
+        setIsRunning(true)
+        setIncreasing(0)
+        d3.selectAll("svg > *").remove()
+      }, 3000)
+    }
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [isRunning, increasing])
 
 
   useEffect(
@@ -43,28 +58,28 @@ const Chart = (props) => {
       if (d3Container.current) {
         const svg = d3.select(d3Container.current)
           .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
           .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
         d3.csv(csvData, (d) => {
-            const format = { date : d3.timeParse("%Y-%m")(d.date), value : parseFloat(d.value) }
-            return format
+          const format = { date: d3.timeParse("%Y-%m")(d.date), value: parseFloat(d.value) }
+          return format
         }).then(
           (data) => {
             const x = d3.scaleTime()
               .domain(d3.extent(data, (d) => {
-                return d.date 
+                return d.date
               }))
-              .range([ 0, width ])
+              .range([0, width])
             svg.append("g")
               .attr("transform", "translate(0," + height + ")")
               .call(d3.axisBottom(x))
 
             const y = d3.scaleLinear()
-              .domain([0, d3.max(data, function(d) { return +d.value; })])
-              .range([ height , 0 + increasing ])
+              .domain([0, d3.max(data, function (d) { return +d.value; })])
+              .range([height, 0 + increasing])
             svg.append("g")
               .call(d3.axisLeft(y))
 
@@ -74,8 +89,8 @@ const Chart = (props) => {
               .attr("stroke", "red")
               .attr("stroke-width", 1)
               .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.value) })
+                .x(function (d) { return x(d.date) })
+                .y(function (d) { return y(d.value) })
               )
               .on("mouseover", function (mouseEvent) {
                 d3
@@ -139,7 +154,7 @@ const App = () => {
         </Modal>
 
         <div className="chart-container">
-          <Chart mouseX={mouse.x} mouseY={mouse.y}/>
+          <Chart mouseX={mouse.x} mouseY={mouse.y} />
         </div>
 
         <header className="header">
