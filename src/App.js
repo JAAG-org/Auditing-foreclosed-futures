@@ -49,8 +49,6 @@ const Chart = (props) => {
       const width = 1000 - margin.left - margin.right
       const height = 400 - margin.top - margin.bottom
 
-      console.log(increasing)
-
       if (increasing > 300) {
         setIsRunning(false)
       }

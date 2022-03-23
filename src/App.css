@@ -58,11 +58,13 @@
 
 .chart-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 30%;
   left: calc(50% - 400px);
 }
 
 .work-container {
+  position: absolute;
+  bottom: 80px;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
@@ -70,7 +72,7 @@
   padding: 20px;
   border: 1px solid white;
   border-radius: 5px;
-  width: calc(100% - 40px)
+  width: calc(100% - 80px)
 }
 
 .work-card {
